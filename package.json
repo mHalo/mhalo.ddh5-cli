@@ -2,6 +2,7 @@
   "name": "@mhalo/ddh5-cli",
   "version": "0.0.6",
   "description": "@mhalo/ddh5-cli",
+  "private": false,
   "main": "./entry.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
