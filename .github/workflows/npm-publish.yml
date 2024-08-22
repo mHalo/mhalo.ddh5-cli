@@ -16,11 +16,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: bump-pkg-version
+      - name: npm-install
         run: |
           npm install
-          npm version patch
+      - name: bump-pkg-version
+        run: npm version patch
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: publish-npm
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
