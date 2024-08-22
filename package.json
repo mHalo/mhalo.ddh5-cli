@@ -11,9 +11,11 @@
   },
   "type": "module",
   "keywords": [],
-  "author": "",
   "license": "LGPL-2.1",
-  
+  "author": {
+    "name": "mhalo",
+    "email": "450684586@qq.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mHalo/mhalo.ddh5-cli.git"
