@@ -30,4 +30,6 @@ jobs:
       - name: bump-pkg-version
         run: npm version patch
       - name: publish-npm
-        run: npm publish --access public
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          npm publish --access public
