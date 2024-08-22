@@ -19,10 +19,11 @@ jobs:
       - name: npm-install
         run: |
           npm install
-      #- name: bump-pkg-version
-      #  run: npm version patch
-      #  env:
-      #    NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          npm ci
+      - name: bump-pkg-version
+        run: npm version patch
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: publish-npm
         run: npm publish --access public
         env:
