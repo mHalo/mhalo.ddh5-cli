@@ -1,0 +1,70 @@
+var gulp = require('gulp'),
+  os = require('os'),
+  requireDir = require('require-dir'),
+  connect = require('gulp-connect'),
+  livereload = require('gulp-livereload'),
+  proxy = require('http-proxy-middleware');
+requireDir('./gulp-pack/tasks/', { recurse: true });
+
+const getIPV4Address = () => {
+  const interfaces =  os.networkInterfaces();
+  for(const device in interfaces){
+    const iface = interfaces[device];
+    for(let i =0; i< iface.length;i++){
+      let alias = iface[i];
+      if(alias.address && alias.address.indexOf(":") < 0 && !alias.address.endsWith('.1')){
+        return alias.address;
+      }
+    }
+  }
+  return null;
+}
+
+gulp.task('publish', gulp.series('clean', 'run-cmd', 'wait', gulp.parallel('css', 'script'), 'wait', 'copy', 'rev', 'move'));
+
+const ipv4Address = getIPV4Address();
+//serve
+const proxyUrlPrefix = `http://${ipv4Address}:<%=ports.backProxy %>`;
+gulp.task('serve', function (cb) {
+  connect.server({
+    root: '',
+    port: <%=ports.run %>,
+    host: ipv4Address,
+    livereload: {
+      port: <%=ports.livereload %>
+    },
+    middleware: function (connect, opt) {
+      return [ 'temp' ].map((prefix) => {
+        proxy.createProxyMiddleware(`/${prefix}`, {
+          target: proxyUrlPrefix + `/${prefix}/`,//代理的目标地址
+          changeOrigin: true,//
+          pathRewrite: {//路径重写规则 
+            [`^/${prefix}/`]: ''
+          }
+        })
+      })
+    }
+  });
+  cb();
+});
+//sass
+gulp.task('watch', function (cb) {
+  livereload.listen({
+    port: <%=ports.livereload %>,
+    host: ipv4Address,
+    start: true,
+    quiet: false
+  });
+  gulp.watch(['./scss/**/*.scss'], gulp.series("scss"));
+  gulp.watch(['./typescripts/**/*.ts'], gulp.series("typescript"));
+  gulp.watch([
+    './css/**/*.css',
+    './scripts/**/*.js',
+    './*.html',
+  ]).on('change', function (file) {
+    livereload.changed(file);
+  });
+  cb();
+})
+// 合并任务
+gulp.task('default', gulp.series('serve', 'scss', 'typescript', 'watch'));

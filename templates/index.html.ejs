@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title><%=title %></title>
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="imagemode" content="force" />
+        <meta name="layoutmode" content="standard" />
+        <meta name="x5-page-mode" content="app" />
+        <meta name="x5-orientation" content="portrait" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <% if(libs.includes('layer-mobile')) { %><link rel="stylesheet" href="./libs/layer-mobile/layer-mobile.css" /><% } %>
+        <% if(libs.includes('h5fx')) { %><link rel="stylesheet" href="./libs/h5fx/h5fx.css" /><% } %>
+        <link rel="stylesheet" href="./css/animate.css" />
+        <link rel="stylesheet" href="./css/index.css" />
+    </head>
+    <body>
+        <div class="h5-wrapper H5-page">
+            
+        </div>
+    </body>
+</html>
+<% if(libs.includes('wxjssdk')) { %><script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script><% } %>
+<% if(libs.includes('stalker')) { %><script src="https://????.????.com/scripts/stalker.min.js" endpoint="https://????.????.com/stalker/tail"></script><% } %>
+<% if(libs.includes('layer-mobile')) { %><script src="./libs/layer-mobile/layer-mobile.js"></script><% } %>
+<% if(libs.includes('html2canvas')) { %><script src="./libs/html2canvas.1.4.1.js"></script><% } -%>
+<% if(libs.includes('jsencrypt')) { %><script src="./libs/jsencrypt.min.js"></script><% } -%>
+<% if(libs.includes('h5fx')) { %><script src="./libs/h5fx/h5fx.js"></script><% } -%>
+<% if(libs.includes('pixi')) { %><script src="./libs/pixi/pixi.min-v7.js"></script><% } -%>
+<% if(libs.includes('pixi')) { %><script src="./libs/pixi/pixi-sound-v7.js"></script><% } -%>
+<% if(appType == 'cshtml') { -%>
+<script type="text/javascript">
+    window.urlPrefix = "/hntc/2024qixi/";
+    ~(new function (_configValue) {
+        let configValue = null;
+        try {
+            configValue = JSON.parse(_configValue)
+        } catch {
+            return;
+        }
+        let configs = Object.assign({}, configValue);
+        stalker.update({ uid: configs.profiles.openId });
+        this.get = function (callback) { callback && callback.call(null, configs); };
+        window.globalConfig = this;
+        window.globalConfig.get();
+    }('@(Html.Raw(ViewBag.globalConfigs))'));
+    var locHref = h5fx.queryParse(decodeURIComponent(location.href)) || {};
+</script><% } -%>
+<% if(libs.includes('lucky-draw')) { %><script src="./libs/lucky-draw.js"></script><% } %>
+<% if(libs.includes('clipboard')) { %><script src="./libs/clipboard.min.js"></script><% } %>
+<% if(libs.includes('timer')) { %><script src="./libs/timer.js"></script><% } %>
+<script src="./scripts/index.js"></script>
+<% if(libs.includes('stalker')) { -%>
+<!--removeIf(production)-->
+<script type="text/javascript">
+    location.host.indexOf("192.168.1") >= 0 && (stalker = { tail: () => {}, pagein: () => {} })
+</script>
+<!--endRemoveIf(production)-->
+<% } -%>
+<script type="text/javascript">
+$(function(){
+<% if(libs.includes('layer-mobile')) { -%>
+    window.popupToast = function (msg, time) {
+        layer.open({
+            content: msg,
+            skin: 'msg',
+            time: time || 2
+        });
+    };
+<% } -%>
+<% if(libs.includes('wxjssdk')) { -%>
+    const jssdkApiHandler = location.host.indexOf("192.168.1") >= 0 
+        ? new Promise(resolve => resolve(''))
+        : new Promise(resolve => h5fx.http.get("https://????.????.com/wx/ddhd/jssdk?url=" + encodeURIComponent(location.href)).then(res => resolve(res.data)));
+            
+    h5fx.device.isWechat && jssdkApiHandler.then(function (data) {
+        !!data && h5fx.wxJssdk.init({
+            debug: false,
+            appId: data.appId,
+            timestamp: data.timestamp,
+            nonceStr: data.nonceStr,
+            signature: data.signature,
+            ready: function () {
+                this.hideH5UnneededMenus();
+                this.share({
+                    title: 'title',
+                    desc: 'desc',
+                    timeline: 'timeline',
+                    link: location.origin + '/hntc/2024qixi/',
+                    imgUrl: location.origin + "/hntc/2024qixi/images/share.png",
+                    success: function (type) {
+<% if(libs.includes('stalker')) { %>
+                        stalker.tail('微信分享', type);
+<% } %>
+                    }
+                });
+            }
+        });
+    });
+<% if(libs.includes('stalker')) { -%>
+    stalker.pagein();
+<% } -%>
+});
+<% } -%>
+</script>

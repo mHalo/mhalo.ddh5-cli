@@ -1,0 +1,24 @@
+{
+  "name": "ddh5-cli",
+  "version": "0.0.1",
+  "description": "mhalo.ddh5-cli",
+  "main": "./entry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@inquirer/prompts": "^5.3.8",
+    "chalk": "^5.3.0",
+    "command-line-args": "^6.0.0",
+    "command-line-usage": "^7.0.3",
+    "commander": "^12.1.0",
+    "cross-spawn": "^7.0.3",
+    "ejs": "^3.1.10",
+    "prompts": "^2.4.2",
+    "update-notifier": "^7.2.0"
+  }
+}

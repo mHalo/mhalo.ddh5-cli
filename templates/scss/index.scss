@@ -1,0 +1,44 @@
+html{
+    overflow: hidden;
+}
+body {
+    background: #000;
+    -webkit-overflow-scrolling: auto;
+    &::after {
+        pointer-events: none;
+        content: '';
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 101vw;
+        height: 101vh;
+        text-align: center;
+        color: #fff;
+        background: linear-gradient(
+            180deg,
+            #f8798a 0%,
+            #f98c9b 25%,
+            #eeb1c0 50%,
+            #d3d0e1 75%,
+            #d3dbee 100%
+        );
+        z-index: -1;
+    }
+}
+.H5-wrapper{
+    position: fixed;
+}
+
+
+
+
+
+body.wx-ios{
+    
+}
+body.wx_smob{
+
+}
+body.wx_mate10{
+
+}
