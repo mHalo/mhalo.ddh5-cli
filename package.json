@@ -1,6 +1,6 @@
 {
   "name": "@mhalo/ddh5-cli",
-  "version": "0.1.4",
+  "version": "0.1.2",
   "description": "@mhalo/ddh5-cli",
   "private": false,
   "main": "./entry.js",
@@ -13,8 +13,10 @@
   "type": "module",
   "keywords": [],
   "license": "LGPL-2.1",
-  "registryUrl": "LGPL-2.1",
-  "repository": "@mhalo/ddh5-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mHalo/mhalo.ddh5-cli.git"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "provenance": true,
