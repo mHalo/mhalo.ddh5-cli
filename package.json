@@ -1,6 +1,6 @@
 {
   "name": "@mhalo/ddh5-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "@mhalo/ddh5-cli",
   "main": "./entry.js",
   "scripts": {
