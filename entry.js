@@ -1,4 +1,3 @@
-#! /usr/bin/env 
 // import entryArgsHandler from "./entry/entryArgsHandler.js";
 // entryArgsHandler.register();
 import pkg from './utils/package-info.js'
