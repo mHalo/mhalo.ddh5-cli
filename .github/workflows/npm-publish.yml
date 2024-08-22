@@ -20,8 +20,6 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: npm-install
         run: |
@@ -35,3 +33,5 @@ jobs:
       - name: publish-npm
         run: |
           npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
