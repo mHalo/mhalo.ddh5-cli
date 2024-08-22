@@ -9,7 +9,7 @@ const handlers = {
 }
 
 program
-    .version(`mhalo.ddh5-cli ${pkg.version}`, '-v, --vers')
+    .version(`@mhalo/ddh5-cli ${pkg.version}`, '-v, --vers')
     .usage('<command> [options]', '-h --help');
 
 export default {

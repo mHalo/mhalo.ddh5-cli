@@ -1,10 +1,13 @@
 {
   "name": "@mhalo/ddh5-cli",
-  "version": "0.0.2",
-  "description": "mhalo.ddh5-cli",
+  "version": "0.0.3",
+  "description": "@mhalo/ddh5-cli",
   "main": "./entry.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ddh5-cli": "./entry.js"
   },
   "type": "module",
   "keywords": [],
