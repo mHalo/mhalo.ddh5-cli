@@ -5,8 +5,8 @@ name: Node.js Package
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 jobs:
   build:
@@ -30,6 +30,7 @@ jobs:
       - name: bump-pkg-version
         run: npm version patch
       - name: publish-npm
+        if: github.ref == 'refs/heads/main' && github.sha != github.event.before
         run: |
           npm publish --access public
           git add .
