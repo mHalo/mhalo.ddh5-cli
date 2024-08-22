@@ -33,8 +33,10 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.sha != github.event.before
         run: |
           npm publish --access public
-          git add .
-          git push
-          git commit -m "Update version"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
