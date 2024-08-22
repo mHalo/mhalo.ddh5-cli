@@ -32,7 +32,9 @@ jobs:
           git config user.email '450684586@qq.com'
           npm config set https://registry.npmjs.org/:_authToken=$NPM_TOKEN
       - name: bump-pkg-version
-        run: npm version patch
+        run: |
+          git pull
+          npm version patch
       - name: publish-npm
         if: github.ref == 'refs/heads/main' && github.sha != github.event.before
         run: |
