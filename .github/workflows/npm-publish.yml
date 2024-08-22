@@ -34,7 +34,7 @@ jobs:
         run: |
           npm publish --access public
           git add .
-          git commit -m "Update version"
           git push
+          git commit -m "Update version"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
