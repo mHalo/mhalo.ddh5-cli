@@ -27,6 +27,8 @@ jobs:
         run: |
           npm install
           npm ci
+          git config --global user.name 'mhalo'
+          git config --global user.email '450684586@qq.com'
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
       - name: bump-pkg-version
         run: npm version patch
