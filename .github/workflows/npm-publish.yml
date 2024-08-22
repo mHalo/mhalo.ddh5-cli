@@ -20,19 +20,17 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-
       - name: npm-install
         run: |
           npm install
           npm ci
-          git config --global user.name 'mhalo'
-          git config --global user.email '450684586@qq.com'
-          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          git config user.name 'mhalo'
+          git config user.email '450684586@qq.com'
+          npm config set https://registry.npmjs.org/:_authToken=$NPM_TOKEN
       - name: bump-pkg-version
         run: npm version patch
       - name: publish-npm
         run: |
-          npm login --registry=//registry.npmjs.org/:_authToken=$NPM_TOKEN
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
