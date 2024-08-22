@@ -27,9 +27,9 @@ jobs:
         run: |
           npm install
           npm ci
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
       - name: bump-pkg-version
         run: npm version patch
       - name: publish-npm
         run: |
-          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           npm publish --access public
