@@ -190,9 +190,20 @@ export default {
                 checkWorkingDir(name).then(async destDir => {
                     createFiles(templateDir, destDir, templateData);
 
-                    const ensure = await confirm({ 
-                        message: `是否在项目目录[${destDir}]下安装依赖包（执行pnpm i）?` 
-                    }).catch((error)=>{ handlePromptsError(error); });
+                    const ensure = await select({
+                        message:  `是否安装依赖包（执行pnpm i）?\r\n${ chalk.yellowBright(`项目目录：[${destDir}]`) }\r\n` ,
+                        choices: [
+                            {
+                                name: '立即安装依赖包',
+                                value: true,
+                            },
+                            {
+                                name: '稍后自行手动安装',
+                                value: false,
+                            }
+                        ]
+                    }).catch((error)=>{ handlePromptsError(error); })
+
                     if(ensure){
                         const installPkg = spawn('pnpm', ['i', '--prefer-offline', '--no-frozen-lockfile', '--dir', destDir], { stdio: 'inherit' });
                         installPkg.on('close', (code) => {

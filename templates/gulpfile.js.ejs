@@ -34,15 +34,15 @@ gulp.task('serve', function (cb) {
       port: <%=ports.livereload %>
     },
     middleware: function (connect, opt) {
-      return [ 'temp' ].map((prefix) => {
-        proxy.createProxyMiddleware(`/${prefix}`, {
-          target: proxyUrlPrefix + `/${prefix}/`,//代理的目标地址
+      return [
+        proxy.createProxyMiddleware('/temp', {
+          target: proxyUrlPrefix + '/temp/',//代理的目标地址
           changeOrigin: true,//
           pathRewrite: {//路径重写规则 
-            [`^/${prefix}/`]: ''
+            '^/temp/': ''
           }
         })
-      })
+      ]
     }
   });
   cb();
