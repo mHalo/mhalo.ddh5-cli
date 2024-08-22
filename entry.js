@@ -7,5 +7,6 @@ import entryCmdsHandler from "./entry/entryCmdsHandler.js";
 const notifier = updateNotifier({ pkg });
 notifier.update && notifier.notify();
 
+
 entryCmdsHandler.register();
 
