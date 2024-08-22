@@ -1,11 +1,13 @@
 import { Command } from 'commander'
 import pkg from '../utils/package-info.js'
 import create from './cmds-handlers/create.js'
+import checkUpdate from './cmds-handlers/check-update.js'
 
 const program = new Command();
 
 const handlers = {
-    create
+    create,
+    checkUpdate
 }
 
 program
