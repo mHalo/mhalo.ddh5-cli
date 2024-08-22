@@ -1,6 +1,6 @@
 {
-  "name": "mhalo.ddh5-cli",
-  "version": "0.0.1",
+  "name": "@mhalo/ddh5-cli",
+  "version": "0.0.2",
   "description": "mhalo.ddh5-cli",
   "main": "./entry.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "type": "module",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "LGPL-2.1",
   "dependencies": {
     "@inquirer/prompts": "^5.3.8",
     "chalk": "^5.3.0",
