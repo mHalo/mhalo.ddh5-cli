@@ -18,7 +18,7 @@
     "url": "git+https://github.com/mHalo/mhalo.ddh5-cli.git"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "http://registry.npm.taobao.org/",
     "provenance": true,
     "access": "public"
   },

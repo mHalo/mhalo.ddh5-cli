@@ -28,3 +28,19 @@ export default {
             })
     }
 }
+
+
+/**
+# 查看自己的安装源
+npm config get registry
+ 
+# 更换npm源为国内淘宝镜像
+npm config set registry http://registry.npm.taobao.org/
+ 
+# 或者国内npm官方镜像
+npm config set registry http://registry.cnpmjs.org/
+ 
+# ----- 还原npm源 ------
+npm config set registry https://registry.npmjs.org/
+
+ */
