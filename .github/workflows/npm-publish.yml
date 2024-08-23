@@ -28,18 +28,13 @@ jobs:
         run: |
           npm install
           npm ci
-          git config user.name 'mhalo'
-          git config user.email '450684586@qq.com'
+          git config user.name ${{secrets.USER_NAME}}
+          git config user.email ${{secrets.USER_EMAIL}}
           npm config set https://registry.npmjs.org/:_authToken=$NPM_TOKEN
-      - name: bump-pkg-version
-        run: |
-          git status
-          git add .
-          git commit -m "publish to npm"
-          npm version patch
       - name: publish-npm
         if: github.ref == 'refs/heads/main' && github.sha != github.event.before
         run: |
+          npm version patch
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
