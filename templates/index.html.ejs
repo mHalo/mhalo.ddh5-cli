@@ -17,8 +17,12 @@
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <% if(libs.includes('layer-mobile')) { %><link rel="stylesheet" href="./libs/layer-mobile/layer-mobile.css" /><% } %>
-        <% if(libs.includes('h5fx')) { %><link rel="stylesheet" href="./libs/h5fx/h5fx.css" /><% } %>
+        <% if(libs.includes('layer-mobile')) { -%>
+        <link rel="stylesheet" href="./libs/layer-mobile/layer-mobile.css" />
+        <% } -%>
+        <% if(libs.includes('h5fx')) { -%>
+        <link rel="stylesheet" href="./libs/h5fx/h5fx.css" />
+        <% } -%>
         <link rel="stylesheet" href="./css/animate.css" />
         <link rel="stylesheet" href="./css/index.css" />
     </head>
@@ -28,14 +32,33 @@
         </div>
     </body>
 </html>
-<% if(libs.includes('wxjssdk')) { %><script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script><% } %>
-<% if(libs.includes('stalker')) { %><script src="https://????.????.com/scripts/stalker.min.js" endpoint="https://????.????.com/stalker/tail"></script><% } %>
-<% if(libs.includes('layer-mobile')) { %><script src="./libs/layer-mobile/layer-mobile.js"></script><% } %>
-<% if(libs.includes('html2canvas')) { %><script src="./libs/html2canvas.1.4.1.js"></script><% } -%>
-<% if(libs.includes('jsencrypt')) { %><script src="./libs/jsencrypt.min.js"></script><% } -%>
-<% if(libs.includes('h5fx')) { %><script src="./libs/h5fx/h5fx.js"></script><% } -%>
-<% if(libs.includes('pixi')) { %><script src="./libs/pixi/pixi.min-v7.js"></script><% } -%>
-<% if(libs.includes('pixi')) { %><script src="./libs/pixi/pixi-sound-v7.js"></script><% } -%>
+<% if(libs.includes('wxjssdk')) { -%>
+<script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<% } -%>
+<% if(libs.includes('stalker')) { -%>
+<script src="https://????.????.com/scripts/stalker.min.js" endpoint="https://????.????.com/stalker/tail"></script>
+<% } -%>
+<% if(libs.includes('layer-mobile')) { -%>
+<script src="./libs/layer-mobile/layer-mobile.js"></script>
+<% } -%>
+<% if(libs.includes('html2canvas')) { -%>
+<script src="./libs/html2canvas.1.4.1.js"></script>
+<% } -%>
+<% if(libs.includes('jsencrypt')) { -%>
+<script src="./libs/jsencrypt.min.js"></script>
+<% } -%>
+<% if(libs.includes('h5fx')) { -%>
+<script src="./libs/h5fx/h5fx.js"></script>
+<% } -%>
+<% if(libs.includes('pixi')) { -%>
+<script src="./libs/pixi/pixi.min-v7.js"></script>
+<% } -%>
+<% if(libs.includes('pixi')) { -%>
+<script src="./libs/pixi/pixi-sound-v7.js"></script>
+<% } -%>
+<% if(libs.includes('phaser')) { -%>
+<script src="./libs/phaser/phaser.min.js"></script>
+<% } -%>
 <% if(appType == 'cshtml') { -%>
 <script type="text/javascript">
     window.urlPrefix = "/hntc/2024qixi/";
@@ -54,9 +77,15 @@
     }('@(Html.Raw(ViewBag.globalConfigs))'));
     var locHref = h5fx.queryParse(decodeURIComponent(location.href)) || {};
 </script><% } -%>
-<% if(libs.includes('lucky-draw')) { %><script src="./libs/lucky-draw.js"></script><% } %>
-<% if(libs.includes('clipboard')) { %><script src="./libs/clipboard.min.js"></script><% } %>
-<% if(libs.includes('timer')) { %><script src="./libs/timer.js"></script><% } %>
+<% if(libs.includes('lucky-draw')) { -%>
+<script src="./libs/lucky-draw.js"></script>
+<% } -%>
+<% if(libs.includes('clipboard')) { -%>
+<script src="./libs/clipboard.min.js"></script>
+<% } -%>
+<% if(libs.includes('timer')) { -%>
+<script src="./libs/timer.js"></script>
+<% } -%>
 <script src="./scripts/index.js"></script>
 <% if(libs.includes('stalker')) { -%>
 <!--removeIf(production)-->
@@ -76,6 +105,7 @@ $(function(){
         });
     };
 <% } -%>
+
 <% if(libs.includes('wxjssdk')) { -%>
     const jssdkApiHandler = location.host.indexOf("192.168.1") >= 0 
         ? new Promise(resolve => resolve(''))
@@ -97,17 +127,21 @@ $(function(){
                     link: location.origin + '/hntc/2024qixi/',
                     imgUrl: location.origin + "/hntc/2024qixi/images/share.png",
                     success: function (type) {
-<% if(libs.includes('stalker')) { %>
+
+<% if(libs.includes('stalker')) { -%>
                         stalker.tail('微信分享', type);
-<% } %>
+<% } -%>
+
                     }
                 });
             }
         });
     });
+
 <% if(libs.includes('stalker')) { -%>
     stalker.pagein();
 <% } -%>
-});
+
 <% } -%>
+});
 </script>

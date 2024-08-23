@@ -136,6 +136,11 @@ export default {
                             description: '2D引擎Pixi'
                         },
                         {
+                            name: 'phaser',
+                            value: 'phaser',
+                            description: '2D引擎phaser'
+                        },
+                        {
                             name: 'html2canvas',
                             value: 'html2canvas',
                             description: '海报生成类库'
