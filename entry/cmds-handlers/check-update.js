@@ -7,16 +7,23 @@ export default {
             .command('update')
             .description('check update')
             .option('-d, --detail [value]', 'update notifier detail', false)
-            .action(async (options) => {
+            .option('-f, --fetch [value]', 'fetch npmjs.registry result', false)
+            .action((options) => {
                 const notifier = updateNotifier({ 
                     pkg,
-                    updateCheckInterval: 1000 * 60 *60 /**每小时检查一次 */
-                 });
+                    updateCheckInterval: 1000 * 60 * 60 /**每小时检查一次 */
+                });
+
                 if(notifier.update){
-                    notifier.notify()
+                    notifier.notify({ isGlobal: true })
                 }
                 if(options.detail){
                     console.info('update-notifier', JSON.stringify(notifier, null, 2))
+                }
+                if(options.fetch){
+                    notifier.fetchInfo().then(res => {
+                        console.info('update-notifier-fetch', res);
+                    });
                 }
             })
     }
