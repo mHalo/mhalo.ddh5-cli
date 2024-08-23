@@ -30,10 +30,10 @@ jobs:
           npm ci
           git config user.name ${{secrets.USER_NAME}}
           git config user.email ${{secrets.USER_EMAIL}}
-          npm config set https://registry.npmjs.org/:_authToken=$NPM_TOKEN
       - name: publish-npm
         if: github.ref == 'refs/heads/main' && github.sha != github.event.before
         run: |
+          npm config set https://registry.npmjs.org/:_authToken=$NPM_TOKEN
           npm version patch
           npm publish --access public
         env:
