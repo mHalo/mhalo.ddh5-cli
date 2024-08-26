@@ -50,14 +50,23 @@
 <% if(libs.includes('h5fx')) { -%>
 <script src="./libs/h5fx/h5fx.js"></script>
 <% } -%>
-<% if(libs.includes('pixi')) { -%>
+<% if(libs.includes('pixi-v7')) { -%>
 <script src="./libs/pixi/pixi.min-v7.js"></script>
 <% } -%>
-<% if(libs.includes('pixi')) { -%>
+<% if(libs.includes('pixi-v7')) { -%>
 <script src="./libs/pixi/pixi-sound-v7.js"></script>
+<% } -%>
+<% if(libs.includes('pixi-v8')) { -%>
+<script src="./libs/pixi/pixi.min-v8.js"></script>
+<% } -%>
+<% if(libs.includes('pixi-v8')) { -%>
+<script src="./libs/pixi/pixi-sound-v8.js"></script>
 <% } -%>
 <% if(libs.includes('phaser')) { -%>
 <script src="./libs/phaser/phaser.min.js"></script>
+<% } -%>
+<% if(libs.includes('phaser-lite')) { -%>
+<script src="./libs/phaser/phaser-lite.min.js"></script>
 <% } -%>
 <% if(appType == 'cshtml') { -%>
 <script type="text/javascript">

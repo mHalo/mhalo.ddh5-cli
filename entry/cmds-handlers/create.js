@@ -131,13 +131,23 @@ export default {
                             description: '抽奖组件类库'
                         },
                         {
-                            name: 'pixi',
-                            value: 'pixi',
+                            name: 'pixi-v7',
+                            value: 'pixi-v7',
+                            description: '2D引擎Pixi'
+                        },
+                        {
+                            name: 'pixi-v8',
+                            value: 'pixi-v8',
                             description: '2D引擎Pixi'
                         },
                         {
                             name: 'phaser',
                             value: 'phaser',
+                            description: '2D引擎phaser'
+                        },
+                        {
+                            name: 'phaser-lite',
+                            value: 'phaser-lite',
                             description: '2D引擎phaser'
                         },
                         {
@@ -199,13 +209,13 @@ export default {
                         message:  `是否安装依赖包（执行pnpm i）?\r\n${ chalk.yellowBright(`项目目录：[${destDir}]`) }\r\n` ,
                         choices: [
                             {
-                                name: '立即安装依赖包',
-                                value: true,
-                            },
-                            {
                                 name: '稍后自行手动安装',
                                 value: false,
-                            }
+                            },
+                            {
+                                name: '立即安装依赖包',
+                                value: true,
+                            }                            
                         ]
                     }).catch((error)=>{ handlePromptsError(error); })
 

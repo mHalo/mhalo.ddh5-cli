@@ -7,10 +7,12 @@
         },
     };
 
-    PIXI.sound.add('click', "./audios/ui-click.mp3");
-
-    var playClickAudio = () => PIXI.sound.play('click');
-    const crypter = new h5crypt().setKey(['MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDN+h21pGyCnhl', 'M1jMfhQvZ3QYKCbUsd4s8RGVUGM0cBPVzw6ipa2VJyie', 'sE1J6eLvCgLp0t2iBNgthFMA3OvjhkdqGGBzDl+eRwsCOmgDSyc7JNZG1XQ4yFExZowDmHT1', '7fR87', 'Ds+54hSNFSE4kEep+TzV1iNcJcf+TJvQRQIDAQAB'].join('/'));
+<% if(libs.includes('jsencrypt')) { -%>
+    const crypter = new h5crypt().setKey([
+        '', '', '', '', ''
+    ].join('/'));
+<% } -%>
+<% if(libs.includes('layer-mobile')) { -%>
     const openLoginExpiredTips = () => {
         setTimeout(() => {
             layer.open({
@@ -21,8 +23,9 @@
             }); 
         }, 3e2);
     }
+<% } -%>
 
-
+<% if(appType == 'cshtml') { -%>
     ;(function(/** 接口定义 */){
         h5fx.http.defaults.timeout = 30e3;
         h5fx.http.defaults.headers["Content-Type"] = "application/json";
@@ -32,7 +35,6 @@
             getIData: () => h5fx.http.get(window.urlPrefix + 'idata?local-debug&v=' + new Date() * 1),
         }
     })();
-
     ;(function(/** 定义全局信息 */){
         window.globalConfig = window.globalConfig || new function () {
             var _this = this, isReady = false, onRequesting = false, retryTimes = 0, configs = {};
@@ -62,13 +64,13 @@
             }
         }
     })();
-
     ;(function(/** 初始化数据 */){
         $('body').toggleClass('wx-ios', h5fx.device.isIos);
         window.globalConfig.get(config => {
             
         });
     })();
+</script><% } -%>
 
     ;(function(/** 背景音乐 */){
         var autoPlayBgm = h5fx.autoPlayAudio(global.audios.bgMusicEle);
@@ -137,7 +139,89 @@
         loaderQueue.loadManifest(images);
     })();
 
+<% if(libs.includes('phaser') || libs.includes('phaser-lite')) { -%>
+    ;(function (/** phaser-game */) {
+        let winWidth = window.innerWidth, winHeight = window.innerHeight;
+        class PhaserGame extends Phaser.Scene
+        {
+            logo;
+            constructor ()
+            {
+                super();
+            }
 
+            preload ()
+            {
+                this.load.setBaseURL(global.imgUrlPrefix);
+                this.load.image('logo', 'logo.png');
+            }
+
+            create ()
+            {
+                this.logo = this.add.sprite(200, 200, 'logo').setScale(4);
+
+                this.logo2 = this.add.sprite(200, 400, 'logo').setScale(1);
+                
+                this.tweens.add({
+                    targets: this.logo,
+                    angle: 360,
+                    duration: 2000, // 持续时间 2000 毫秒
+                    repeat: -1, // 无限重复
+                    ease: 'Linear' // 使用线性插值
+                });
+            }
+
+            update ()
+            {
+                this.logo2.rotation += 0.01;
+            }
+        }
+
+        const config = {
+            type: Phaser.AUTO,
+            width: 750,
+            height: 750 / winWidth * winHeight,
+            scene: PhaserGame
+        };
+
+        const gameApp = new Phaser.Game(config);
+    })();
+<% } -%>
+
+
+<% if(libs.includes('pixi-v7') || libs.includes('pixi-v8')) { -%>
+    ;(async function (/** phaser-game */) {
+        let winWidth = window.innerWidth, winHeight = window.innerHeight;
+        const gameApp = new PIXI.Application({
+            backgroundColor: '#0064ff',
+            width: 750,
+            height: 750 / winWidth * winHeight,
+            transparent: false,
+            antialias: true
+        }), stage = gameApp.stage, loader = PIXI.Assets, resources = null;
+
+        $("#pixiWrapper").append(gameApp.view);
+
+        const loadRes = async () => {
+            loader.addBundle('resources', {
+                logo: "./images/logo.png"
+            })
+            resources = await loader.loadBundle('resources');
+        }
+        await loadRes();
+
+        const logo = PIXI.Sprite.from(resources.logo);
+        logo.scale.set(0.68)
+        logo.position.set(36,36)
+
+        stage.addChild(logo);
+
+    })();
+<% } -%>
+
+
+
+<% if(libs.includes('clipboard')) { -%>
     const clipboardCopyText = (message) => {
         let clipboard = new ClipboardJS('.clipboard-target', {
             text: function() {
@@ -145,13 +229,17 @@
             }
         });
         clipboard.on('success', (e)=>{
+<% if(libs.includes('layer-mobile')) { -%>
             popupToast("复制成功：" + message);
+<% } -%>
             e.clearSelection();
             clipboard.destroy();
             clipboard = null;
         });
         clipboard.on('error', (e)=>{
+<% if(libs.includes('layer-mobile')) { -%>
             popupToast("复制失败，请手动长按进行复制", 5);
+<% } -%>
             e.clearSelection();
             clipboard.destroy();
             clipboard = null;
@@ -164,7 +252,9 @@
 
         if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(content).then(() => {
+<% if(libs.includes('layer-mobile')) { -%>
                 popupToast("复制成功：" + content);
+<% } -%>
             }).catch(err => {
                 clipboardCopyText(content)
                 setTimeout(function () {
@@ -178,4 +268,5 @@
             }, 200)
         }
     })
+<% } -%>
 })
