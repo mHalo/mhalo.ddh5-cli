@@ -8,17 +8,18 @@ export default {
             .description('check update')
             .option('-d, --detail [value]', 'update notifier detail', false)
             .option('-f, --fetch [value]', 'fetch npmjs.registry result', false)
+            .option('-t, --time [value]', 'fetch npmjs.registry by check-interval', 1000 * 60 * 60)
             .action((options) => {
                 const notifier = updateNotifier({ 
                     pkg,
-                    updateCheckInterval: 1000 * 60 * 60 /**每小时检查一次 */
+                    updateCheckInterval: options.time /**每小时检查一次 */
                 });
 
                 if(notifier.update){
                     notifier.notify({ isGlobal: true })
                 }
                 if(options.detail){
-                    console.info('update-notifier', JSON.stringify(notifier, null, 2))
+                    console.info('update-notifier:', JSON.stringify(notifier, null, 2), '\r\nupdate-options:', JSON.stringify(options, null, 2))
                 }
                 if(options.fetch){
                     notifier.fetchInfo().then(res => {
