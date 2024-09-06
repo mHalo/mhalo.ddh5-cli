@@ -2,6 +2,7 @@ var gulp = require('gulp'),
   sourcemaps = require('gulp-sourcemaps'),
   sass = require('gulp-sass')(require('sass')),
   newer = require('gulp-newer'),
+  autoprefixer = require('gulp-autoprefixer')
   config = require('../config');
 
 gulp.task('scss', function () {
@@ -13,6 +14,7 @@ gulp.task('scss', function () {
     }))
     //   .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer())
     //   .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest("./css"));
 });
